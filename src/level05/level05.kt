@@ -9,18 +9,34 @@ fun containsVowels(s : String) : Boolean =
     s.toCharArray().count { VOWELS.contains(it) } >= 3
 
 fun containsRepeatedChar(s : String) : Boolean {
-    var prev : Char = ' '
-    for (c in s.toCharArray()) {
-        if (c == prev) {
+    for (i in 0..(s.length - 2)) {
+        if (s[i] == s[i + 1]) {
             return true
         }
-        prev = c
     }
     return false
 }
 
 fun containsNastyString(s : String) : Boolean =
     NASTY_STRINGS.asSequence().filter { s.contains(it) }.any()
+
+fun letterRepeated(s : String) : Boolean {
+    for (i in 0..(s.length - 3)) {
+        if (s[i] == s[i + 2]) {
+            return true
+        }
+    }
+    return false
+}
+
+fun repeatedCharTwice(s : String) : Boolean {
+    for (i in 0..(s.length - 2)) {
+        if (s.substring(i+2).contains(s.substring(i, i + 2))) {
+            return true
+        }
+    }
+    return false
+}
 
 fun level05(s : String) : Int =
     s.split("\n").filter {
@@ -29,6 +45,13 @@ fun level05(s : String) : Int =
                 !containsNastyString(it)
     }.count()
 
+fun level05b(s : String) : Int =
+    s.split("\n").filter {
+        letterRepeated(it) &&
+                repeatedCharTwice(it)
+    }.count()
+
 fun main(args : Array<String>) {
     println(level05(File("data/level05/input.txt").readText()))
+    println(level05b(File("data/level05/input.txt").readText()))
 }

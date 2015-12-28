@@ -30,31 +30,23 @@ class CoordIterator(val coordRange : CoordRange) : Iterator<Coord> {
 }
 operator fun Coord.rangeTo(other : Coord) = CoordRange(this, other)
 
-abstract class Action {
-    abstract fun perform(map : Array<Array<Boolean>>, coord : Coord)
-}
-class TurnOn : Action() {
-    override fun perform(map: Array<Array<Boolean>>, coord : Coord) {
-        map[coord.x][coord.y] = true
-    }
-}
-class TurnOff : Action() {
-    override fun perform(map: Array<Array<Boolean>>, coord : Coord) {
-        map[coord.x][coord.y] = false
-    }
-}
-class Toggle : Action() {
-    override fun perform(map: Array<Array<Boolean>>, coord : Coord) {
-        map[coord.x][coord.y] = !map[coord.x][coord.y]
+class Action<T>(val f : (T) -> T) {
+    fun perform(map : Array<Array<T>>, coord : Coord) {
+        map[coord.x][coord.y] = f(map[coord.x][coord.y])
     }
 }
 
 val ACTION_MAP = mapOf(
-        "turn on" to TurnOn(),
-        "turn off" to TurnOff(),
-        "toggle" to Toggle())
+        "turn on" to Action<Boolean>({true}),
+        "turn off" to Action<Boolean>({false}),
+        "toggle" to Action<Boolean>({!it}))
 
 val PATTERN = Pattern.compile("(turn on|toggle|turn off) (\\d+),(\\d+) through (\\d+),(\\d+)")
+
+val ACTION_MAP2 = mapOf(
+        "turn on" to Action<Int>({it + 1}),
+        "turn off" to Action<Int>({Math.max(0, it - 1)}),
+        "toggle" to Action<Int>({it + 2}))
 
 fun level06(s : String) : Int {
     val map: Array<Array<Boolean>> = Array(1000, { Array(1000, { false }) })
@@ -75,6 +67,26 @@ fun level06(s : String) : Int {
     return map.flatMap { it.asIterable() }.count { it }
 }
 
+fun level06b(s : String) : Int {
+    val map: Array<Array<Int>> = Array(1000, { Array(1000, { 0 }) })
+
+    for (line in s.split("\n")) {
+        val matcher = PATTERN.matcher(line)
+        if (!matcher.matches()) {
+            continue
+        }
+
+        val action = ACTION_MAP2[matcher.group(1)]!!
+        val start = Coord(matcher.group(2).toInt(), matcher.group(3).toInt())
+        val end = Coord(matcher.group(4).toInt(), matcher.group(5).toInt())
+
+        (start..end).forEach { action.perform(map, it) }
+    }
+
+    return map.flatMap { it.asIterable() }.sum()
+}
+
 fun main(args : Array<String>) {
     println(level06(File("data/level06/input.txt").readText()))
+    println(level06b(File("data/level06/input.txt").readText()))
 }
