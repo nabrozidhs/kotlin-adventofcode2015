@@ -80,7 +80,11 @@ fun level07(s : String) : Map<String, Expr> {
     return map
 }
 
+fun level07b(s : String) : Map<String, Expr> = level07(s + "\n3176 -> b")
+
 fun main(args : Array<String>) {
-    val map = level07(File("data/level07/input.txt").readText())
-    println(Evaluator(map).eval(map["a"]!!))
+    val map1 = level07(File("data/level07/input.txt").readText())
+    println(Evaluator(map1).eval(map1["a"]!!))
+    val map2 = level07b(File("data/level07/input.txt").readText())
+    println(Evaluator(map2).eval(map2["a"]!!))
 }
