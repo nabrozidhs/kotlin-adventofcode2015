@@ -41,7 +41,6 @@ class Evaluator(val program: Map<String, Expr>) {
                     Operation.OR -> eval(expr.args[0]) or eval(expr.args[1])
                     Operation.RSHIFT -> eval(expr.args[0]) ushr eval(expr.args[1])
                     Operation.LSHIFT -> (eval(expr.args[0]) shl eval(expr.args[1])) and 0xFFFF
-                    else -> throw RuntimeException()
                 }
                 else -> throw RuntimeException()
             }

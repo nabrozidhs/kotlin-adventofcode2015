@@ -17,7 +17,7 @@ fun level10(s: String): String {
     return sb.toString()
 }
 
-fun main(args : Array<String>) {
-    println((0..39).fold("3113322113", {acc, n -> level10(acc)}).length)
-    println((0..49).fold("3113322113", {acc, n -> level10(acc)}).length)
+fun main() {
+    println((0..39).fold("3113322113", { acc, _ -> level10(acc)}).length)
+    println((0..49).fold("3113322113", { acc, _ -> level10(acc)}).length)
 }
