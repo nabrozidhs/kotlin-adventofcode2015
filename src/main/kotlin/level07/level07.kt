@@ -20,8 +20,8 @@ class Num(val value : Int) : Expr()
 class Var(val value : String) : Expr()
 class Op(val op : Operation, vararg val args : Expr) : Expr()
 
-class Evaluator(val program: Map<String, Expr>) {
-    private val cache : MutableMap<Expr, Int> = hashMapOf();
+class Evaluator(private val program: Map<String, Expr>) {
+    private val cache : MutableMap<Expr, Int> = hashMapOf()
 
     fun eval(expr : Expr) : Int {
         val cachedValue = cache[expr]
@@ -79,9 +79,9 @@ fun level07(s : String) : Map<String, Expr> {
     return map
 }
 
-fun level07b(s : String) : Map<String, Expr> = level07(s + "\n3176 -> b")
+fun level07b(s : String) : Map<String, Expr> = level07("$s\n3176 -> b")
 
-fun main(args : Array<String>) {
+fun main() {
     val map1 = level07(File("data/level07/input.txt").readText())
     println(Evaluator(map1).eval(map1["a"]!!))
     val map2 = level07b(File("data/level07/input.txt").readText())

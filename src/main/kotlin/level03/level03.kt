@@ -13,7 +13,7 @@ fun updatePosition(pos: Pair<Int, Int>, c : Char) : Pair<Int, Int> =
 
 fun level03(s : String) : Int {
     var startPosition = Pair(0, 0)
-    var housesVisited = hashSetOf<Pair<Int, Int>>()
+    val housesVisited = hashSetOf<Pair<Int, Int>>()
     for (c in s.toCharArray()) {
         housesVisited.add(startPosition)
         startPosition = updatePosition(startPosition, c)
@@ -25,7 +25,7 @@ fun level03(s : String) : Int {
 fun level03b(s : String) : Int {
     var santaPosition = Pair(0, 0)
     var robotPosition = Pair(0, 0)
-    var housesVisited = hashSetOf<Pair<Int, Int>>()
+    val housesVisited = hashSetOf<Pair<Int, Int>>()
     for (c in s.toCharArray().withIndex()) {
         if (c.index % 2 == 0) {
             housesVisited.add(santaPosition)
@@ -39,7 +39,7 @@ fun level03b(s : String) : Int {
     return housesVisited.size
 }
 
-fun main(args : Array<String>) {
+fun main() {
     println(level03(File("data/level03/input.txt").readText()))
     println(level03b(File("data/level03/input.txt").readText()))
 }

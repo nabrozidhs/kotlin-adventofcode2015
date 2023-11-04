@@ -47,7 +47,7 @@ fun level14part2(input: List<Reindeer>, t: Int): Int {
         }
     }
 
-    return winTable.values.max()!!
+    return winTable.values.max()
 }
 
 fun main() {

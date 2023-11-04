@@ -39,20 +39,19 @@ fun day15(ingredients: List<Ingredient>, filterCalories: Boolean): Int {
     return recursive(ingredients, 100)
         .map {
             val capacity = max(0, ingredients.zip(it)
-                .sumBy { (ingredient, i) -> ingredient.capacity * i })
+                .sumOf { (ingredient, i) -> ingredient.capacity * i })
             val durability = max(0, ingredients.zip(it)
-                .sumBy { (ingredient, i) -> ingredient.durability * i })
+                .sumOf { (ingredient, i) -> ingredient.durability * i })
             val flavor = max(0, ingredients.zip(it)
-                .sumBy { (ingredient, i) -> ingredient.flavor * i })
+                .sumOf { (ingredient, i) -> ingredient.flavor * i })
             val texture = max(0, ingredients.zip(it)
-                .sumBy { (ingredient, i) -> ingredient.texture * i })
+                .sumOf { (ingredient, i) -> ingredient.texture * i })
             val calories = ingredients.zip(it)
-                .sumBy { (ingredient, i) -> ingredient.calories * i }
+                .sumOf { (ingredient, i) -> ingredient.calories * i }
             Pair(capacity * durability * flavor * texture, calories)
         }
         .filter { !filterCalories || it.second == 500 }
-        .map { it.first }
-        .max()!!
+        .maxOf { it.first }
 }
 
 fun main() {

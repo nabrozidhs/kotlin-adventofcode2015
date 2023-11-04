@@ -54,18 +54,18 @@ fun level21(boss: Player, win: Boolean, min: Boolean): Int {
         val player = Player(
             damage = t.first.damage +
                     (t.second?.damage ?: 0) +
-                    (t.third.sumBy { it?.damage ?: 0 }),
+                    (t.third.sumOf { it?.damage ?: 0 }),
             armor = (t.second?.armor ?: 0) +
-                    (t.third.sumBy { it?.armor ?: 0 })
+                    (t.third.sumOf { it?.armor ?: 0 })
         )
         if (win) player >= boss
         else player < boss
     }.map {
         it.first.price +
                 (it.second?.price ?: 0) +
-                it.third.sumBy { v -> v?.price ?: 0 }
+                it.third.sumOf { v -> v?.price ?: 0 }
     }
-    return if (min) results.min()!! else results.max()!!
+    return if (min) results.min() else results.max()
 }
 
 fun main() {

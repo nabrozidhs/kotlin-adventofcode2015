@@ -51,7 +51,7 @@ fun level05b(s : String) : Int =
                 repeatedCharTwice(it)
     }.count()
 
-fun main(args : Array<String>) {
+fun main() {
     println(level05(File("data/level05/input.txt").readText()))
     println(level05b(File("data/level05/input.txt").readText()))
 }

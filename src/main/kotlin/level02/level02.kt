@@ -31,12 +31,12 @@ fun parseString(s : String) : GiftBox {
 fun parseGiftBoxes(s : String) : List<GiftBox> = s.split("\n").map { parseString(it) }
 
 fun level02(s : String) : Int =
-    parseGiftBoxes(s).map { it.surface() + it.sideAreas().min()!! }.sum()
+    parseGiftBoxes(s).sumOf { it.surface() + it.sideAreas().min() }
 
 fun level02b(s : String) : Int =
-    parseGiftBoxes(s).map { it.volume() + it.sidePerimeters().min()!! }.sum()
+    parseGiftBoxes(s).sumOf { it.volume() + it.sidePerimeters().min() }
 
-fun main(args : Array<String>) {
+fun main() {
     val content = File("data/level02/input.txt").readText()
     println(level02(content))
     println(level02b(content))

@@ -26,7 +26,7 @@ fun level04b(s : String) : Int {
     }
 }
 
-fun main(args : Array<String>) {
+fun main() {
     println(level04("yzbqklnj"))
     println(level04b("yzbqklnj"))
 }

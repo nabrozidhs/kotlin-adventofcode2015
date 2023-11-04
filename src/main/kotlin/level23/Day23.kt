@@ -4,7 +4,7 @@ import java.io.File
 
 class State(startValueA: Long) {
 
-    val registers = mutableMapOf<Char, Long>('a' to startValueA)
+    val registers = mutableMapOf('a' to startValueA)
     var idx: Int = 0
 }
 
@@ -79,7 +79,6 @@ fun level23(program: List<Command>, startValueA: Long): Long {
 }
 
 fun main() {
-//    val program = parse("inc a\njio a, +2\ntpl a\ninc a".lines())
     val program = parse(File("data/level23/input.txt").readLines())
     println("part1 ${level23(program, 0)}")
     println("part2 ${level23(program, 1)}")

@@ -28,7 +28,7 @@ fun level16part1(input: List<Aunt>, conditions: Map<String, Int>): Int = input
             aunt,
             conditions.count { (k, v) -> aunt.stuff.getOrDefault(k, -1) == v }
         )
-    }.maxBy { it.second }!!
+    }.maxBy { it.second }
     .first
     .id
 
@@ -45,7 +45,7 @@ fun level16part2(input: List<Aunt>, conditions: Map<String, Int>): Int = input
                 }
             }
         )
-    }.maxBy { it.second }!!
+    }.maxBy { it.second }
     .first
     .id
 

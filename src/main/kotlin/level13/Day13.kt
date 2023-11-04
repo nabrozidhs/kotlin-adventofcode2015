@@ -26,8 +26,8 @@ fun parse(input: List<String>): Map<String, Person> {
 }
 
 fun level13(guests: Map<String, Person>): Int =
-    guests.keys.toList().permutations().map { arrangement ->
-        arrangement.withIndex().map {
+    guests.keys.toList().permutations().maxOf { arrangement ->
+        arrangement.withIndex().sumOf {
             val guest = guests[it.value] ?: error("")
             val left =
                 arrangement[(it.index - 1 + arrangement.size) % arrangement.size]
@@ -35,8 +35,8 @@ fun level13(guests: Map<String, Person>): Int =
 
             guest.mapping.getOrDefault(left, 0) +
                     guest.mapping.getOrDefault(right, 0)
-        }.sum()
-    }.max()!!
+        }
+    }
 
 fun main() {
     val mapping = parse(File("data/level13/input.txt").readLines())

@@ -48,7 +48,7 @@ fun level11(s: String): String {
     return next
 }
 
-fun main(args : Array<String>) {
+fun main() {
     val firstPassword = level11("vzbxkghb")
     println(firstPassword)
     println(level11(firstPassword))
